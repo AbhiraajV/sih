@@ -1,0 +1,78 @@
+datasource db {
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+model User {
+  id        Int     @id @default(autoincrement())
+  username  String
+  email     String  @unique
+  userType  UserType
+  products  Product[]
+  tenders Tender[]
+}
+
+model Product {
+  id          Int       @id @default(autoincrement())
+  name        String
+  description String
+  category    ProductProductCategory
+  user User @relation(fields: [userId], references: [id])
+  userId     Int
+}
+
+model Tender {
+  id       Int  @id @default(autoincrement())
+  BidEndDate DateTime
+  BidStartDate DateTime @default(now())
+  BidNumber String 
+  Ministry String @default("Ministry of Power")
+  Organisation String @default("North Eastern Electric Power Corporation Limited")
+  OfficeName String
+  Quantity Int
+  MinAvgAnTurnover String
+  BidderYox Int
+  MseExemptionOnTurnoverAndYox Boolean
+  DocumentsRequiredFromBidder String @db.Text
+
+  bids Bid[]
+  createdBy User @relation(fields: [userId], references: [id])
+  userId Int
+}
+
+model Bid {
+  id Int @id @default(autoincrement())
+  
+
+  tenderId Int
+  relatedTender Tender @relation(fields: [tenderId],references: [id])
+}
+
+
+
+enum UserType {
+  NEEPCO_Employee
+  Vendor
+  Admin
+  SuperAdmin
+}
+
+
+enum ProductProductCategory {
+  CCTV_System_and_Services
+  Electrical_and_Wiring_Services
+  Maintenance_and_Cleaning_Services
+  Construction_Services
+  Painting_and_Coating_Services
+  Procurement_of_Materials
+  Infrastructure_Development
+  Vehicle_Rental_Services
+  Miscellaneous_Services
+}
+
+
+
