@@ -18,7 +18,7 @@ import { useForm } from "react-hook-form";
 import { Textarea } from "../ui/textarea";
 import { FileUploader } from "react-drag-drop-files";
 import { useState } from "react";
-import DisplayBlob from "../workspace/DisplayBlob";
+// import DisplayBlob from "../workspace/DisplayBlob";
 import useStore from "@/hooks/useStore";
 const formSchema = z.object({
   title: z.string().min(2, {
@@ -134,10 +134,21 @@ export function ProfileForm({ close }: { close?: () => void }) {
                     name="file"
                     types={fileTypes}
                   />
-                  <DisplayBlob
+                  {fileDisplayBlob && (
+                    <a
+                      href={URL.createObjectURL(fileDisplayBlob!)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <span className="text-[0.8rem] font-bold italic underline">
+                        click here to open
+                      </span>
+                    </a>
+                  )}
+                  {/* <DisplayBlob
                     decoded={false}
                     fileDisplayBlob={fileDisplayBlob}
-                  />
+                  /> */}
                 </>
               </FormControl>
               <FormMessage />
