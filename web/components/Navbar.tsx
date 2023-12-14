@@ -21,7 +21,7 @@ function Navbar({}: Props) {
       <div className="flex-1 flex gap-5">
         <div
           className=" font-semibold cursor-pointer"
-          onClick={() => router.push("/")}
+          onClick={() => router.push("/create-tender")}
         >
           New Tender
         </div>

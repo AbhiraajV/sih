@@ -8,6 +8,9 @@ const nextConfig = {
   experimental: {
     serverActions: true,
   },
+  images: {
+    domains: ["uploadthing.com", "utfs.io", "files.edgestore.dev"],
+  },
 };
 
 module.exports = nextConfig;

@@ -4,11 +4,13 @@ import useStore from "@/hooks/useStore";
 import React from "react";
 import { SpinnerRoundFilled } from "spinners-react";
 
-type Props = {};
+type Props = {
+  loading: boolean;
+};
 
-function Loading({}: Props) {
+function Loading({ loading }: Props) {
   const { isLoading } = useStore((state) => state);
-  if (!isLoading) return <></>;
+  if (!loading) return <></>;
   return (
     <div className="fixed top-0 left-0 w-screen h-screen flex items-center justify-center z-50 bg-white bg-opacity-40 backdrop-blur-sm shadow-lg">
       <div className="text-center">

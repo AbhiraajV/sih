@@ -7,7 +7,6 @@ import EmployeeHome from "@/components/EmployeeHome";
 export default async function Home() {
   const user = await initiateProfile();
   const products = await prisma.product.findMany({});
-  console.log({ user });
   if (!user) redirectToSignIn();
   return (
     <div className="max-w-[100vw]">
