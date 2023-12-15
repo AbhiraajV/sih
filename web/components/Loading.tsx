@@ -12,7 +12,7 @@ function Loading({ loading }: Props) {
   const { isLoading } = useStore((state) => state);
   if (!loading) return <></>;
   return (
-    <div className="fixed top-0 left-0 w-screen h-screen flex items-center justify-center z-50 bg-white bg-opacity-40 backdrop-blur-sm shadow-lg">
+    <div className="absolute top-0 left-0 w-[100%] h-[100%] flex items-center justify-center z-50 bg-white bg-opacity-40 backdrop-blur-sm shadow-lg">
       <div className="text-center">
         <SpinnerRoundFilled
           size={90}

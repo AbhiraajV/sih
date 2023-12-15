@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import {
   Chart as ChartJS,
@@ -10,10 +11,6 @@ import {
   Legend,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
-import {
-  ImageSizeObjectKeyType,
-  SizeBasedAnalysisData,
-} from "@/utils/helpers/sizeBitsObject";
 
 ChartJS.register(
   CategoryScale,
@@ -33,30 +30,34 @@ export const options = {
     },
     title: {
       display: true,
-      text: "Number of images needed as per resolution",
     },
   },
 };
-export function LineChart({
-  sizeBasedAnalysisData,
-}: {
-  sizeBasedAnalysisData: SizeBasedAnalysisData;
-}) {
-  const labels: ImageSizeObjectKeyType[] = Object.keys(
-    sizeBasedAnalysisData
-  ) as ImageSizeObjectKeyType[];
 
+export function LineChart({
+  dataset,
+  v_dataset,
+}: {
+  dataset: number[];
+  v_dataset: number[];
+}) {
   const data = {
-    labels,
+    labels: Array.from({ length: dataset.length }, (_, i) => i + 1), // Assuming x-axis as 1, 2, 3, ..., n
     datasets: [
       {
-        label: "Number of Images Required",
-        data: labels.map((label) => sizeBasedAnalysisData[label].imagesNeeded),
+        label: "Tender Growth",
+        data: dataset,
         borderColor: "rgb(255, 99, 132)",
         backgroundColor: "rgba(255, 99, 132, 0.5)",
       },
+      {
+        label: "Vendor Growth",
+        data: v_dataset,
+        borderColor: "rgb(53, 162, 235)",
+        backgroundColor: "rgba(53, 162, 235, 0.5)",
+      },
     ],
   };
-  console.log({ data });
+
   return <Line options={options} data={data} />;
 }

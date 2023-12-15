@@ -27,7 +27,7 @@ function Navbar({}: Props) {
         </div>
         <div
           className=" font-semibold cursor-pointer"
-          onClick={() => router.push("/your-files")}
+          onClick={() => router.push("/your-tenders")}
         >
           Your Tenders
         </div>

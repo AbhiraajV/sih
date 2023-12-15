@@ -18,12 +18,49 @@ model User {
   products ProductUser[]
   tenders Tender[]
 }
+// Add a new model for TenderProductCategory
+model TenderProductCategory {
+  productId Int
+    product Product @relation(fields: [productId], references: [id])
+
+  tenderId Int
+  tender Tender @relation(fields: [tenderId], references: [id])
+  @@id([productId, tenderId])
+  
+}
+
+// Modify the Tender model to have a relation with TenderProductCategory
+model Tender {
+  id       Int  @id @default(autoincrement())
+  BidEndDate DateTime?
+  BidStartDate DateTime? @default(now())
+  BidNumber String? 
+  Ministry String? @default("Ministry of Power")
+  Organisation String? @default("North Eastern Electric Power Corporation Limited")
+  OfficeName String?
+  Quantity Int?
+  MinAvgAnTurnover String?
+  BidderYox Int?
+  MseExemptionOnTurnoverAndYox Boolean?
+  DocumentsRequiredFromBidder String? @db.Text
+  TenderInformation String? @db.Text
+  TenderInformationDoc String? @db.Text
+  GemBidDocument String? @db.Text
+
+  // Add the relation to TenderProductCategory
+  productCategories TenderProductCategory[]
+
+  bids Bid[]
+  createdBy User @relation(fields: [userId], references: [id])
+  userId Int
+}
 
 model Product {
   id Int @id @default(autoincrement())
   description String
   category ProductProductCategory @unique
   users ProductUser[]
+  tenderProductCategories TenderProductCategory[]
 }
 
 model ProductUser {
@@ -32,28 +69,6 @@ model ProductUser {
   userId Int
   product Product @relation(fields: [productId], references: [id])
   @@id([productId, userId])
-}
-model Tender {
-  id       Int  @id @default(autoincrement())
-  BidEndDate DateTime
-  BidStartDate DateTime @default(now())
-  BidNumber String 
-  Ministry String @default("Ministry of Power")
-  Organisation String @default("North Eastern Electric Power Corporation Limited")
-  OfficeName String
-  Quantity Int
-  MinAvgAnTurnover String
-  BidderYox Int
-  MseExemptionOnTurnoverAndYox Boolean
-  DocumentsRequiredFromBidder String @db.Text
-  TenderInformation String @db.Text
-
-  TenderInformationDoc String @db.Text
-  GemBidDocument String @db.Text
-  
-  bids Bid[]
-  createdBy User @relation(fields: [userId], references: [id])
-  userId Int
 }
 
 model Bid {

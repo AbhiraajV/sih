@@ -1,14 +1,18 @@
-import { File, Profile } from "@prisma/client";
+import { $Enums, Product } from "@prisma/client";
 import * as React from "react";
 
 interface EmailTemplateProps {
-  profile: Profile;
-  file: File;
+  products:
+    | {
+        id: number;
+        description: string;
+        category: $Enums.ProductProductCategory;
+      }[]
+    | undefined;
 }
 
 const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
-  profile,
-  file,
+  products,
 }) => (
   <div
     style={{
@@ -33,12 +37,12 @@ const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
           href="http://localhost:3000/"
           style={{ color: "#670499", textDecoration: "none" }}
         >
-          Ultrastore
+          NEEPCO
         </a>
       </h1>
     </div>
     <div style={{ textAlign: "center", fontSize: "18px", margin: "10px 0" }}>
-      The most private free storage on the planet 🤫
+      We found another tender (Made for You!)
     </div>
     <div style={{ textAlign: "center", margin: "40px 0" }}>
       <p
@@ -48,7 +52,7 @@ const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
           textTransform: "uppercase",
         }}
       >
-        Hey, {profile.name}
+        Hey, Vendor
       </p>
       <p
         style={{
@@ -57,13 +61,21 @@ const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
           textTransform: "uppercase",
         }}
       >
-        Your file is Encoded and Encrypted! <br />
-        Check it out!!
+        We found a Tender belonging to the following categories:
+        <ol>
+          {products?.map((product) => (
+            <li key={product.id}>
+              {product.category}
+              <br />
+              {product.description}
+            </li>
+          ))}
+        </ol>
       </p>
       <p style={{ fontSize: "14px", color: "#464646" }}>
-        Visit your file:{" "}
+        Visit the link below and search for 4228377(hard coded for now)
         <a
-          href={"http://localhost:3000/your-files/" + file.id}
+          href={"https://bidplus.gem.gov.in/all-bids"}
           style={{ color: "#670499", textDecoration: "none" }}
         >
           Click here

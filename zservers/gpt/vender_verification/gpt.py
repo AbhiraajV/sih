@@ -3,7 +3,7 @@ import json
 
 import openai
 
-openai.api_key = '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'
+openai.api_key = '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'
 
 text = "	Improvement of Surge Shaft road by Construction of Bituminous road from (Ch. 3600.00m to Ch. 3800.00m) at Dikrong Power House site, Hoj, PLHPS, Arunachal Pradesh (Group-IV)."
 
@@ -47,28 +47,30 @@ category = [
 
 def classify_response(text_input):
 
-    response = openai.Completion.create(
-        model="text-davinci-002",
-        prompt=text_input,
-        max_tokens=100,
-        stop=None,
-        temperature=0.6
-    )
-
-    generated_response = response['choices'][0]['text'].strip()
-
-    # classify response based on predifined list
-    # for i, category_keyword in enumerate(category, 1):
-    #     for keyword in category_keyword:
-    #         if keyword in generated_response:
-    #             return i
-
-    # return "Unclassified"
-
-    return generated_response
+    # response = openai.Completion.create(
+    #     engine="text-davinci-002",
+    #     prompt=text_input,
+    #     max_tokens=100,
+    #     stop=None,
+    #     temperature=0.6
+    # )
 
 
-output = classify_response(text_input, category)
+    # generated_response = response['choices'][0]['text'].strip()
+
+    # # classify response based on predifined list
+    # # for i, category_keyword in enumerate(category, 1):
+    # #     for keyword in category_keyword:
+    # #         if keyword in generated_response:
+    # #             return i
+
+    # # return "Unclassified"
+
+    # return generated_response
+    print(text_input)
+
+
+output = classify_response(text_input)
 
 Class = [
     ["Security and Infrastructure"],
@@ -92,10 +94,10 @@ Class = [
 
 # print(Class[output])
 
-for i in Class:
-    if i[0] in output:
-        call = i[0]
+# for i in Class:
+#     if i[0] in output:
+#         call = i[0]
 
 
-# yeh json response hai
-json_output = json.dump(call)
+# # yeh json response hai
+# json_output = json.dump(call)

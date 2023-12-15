@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { DatePickerWithRange } from "../ui/date-picker";
 import { DateRange } from "react-day-picker";
 import { addDays } from "date-fns";
@@ -19,6 +19,7 @@ import * as z from "zod";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import DragDrop from "../DnD";
+import Loading from "../Loading";
 
 type Props = {
   user: UserWithProductsAndTenders;
@@ -53,6 +54,7 @@ function TenderForm({ user }: Props) {
       tenderInfoPdfUrl: "",
     },
   });
+  const [autofill, setAutoFill] = useState<boolean>(true);
   const [tenderData, setTenderData] = React.useState<Tender>({
     id: 1,
     userId: user.id,
@@ -68,6 +70,8 @@ function TenderForm({ user }: Props) {
     MseExemptionOnTurnoverAndYox: false,
     DocumentsRequiredFromBidder: "",
     TenderInformation: "",
+    GemBidDocument: "",
+    TenderInformationDoc: "",
   });
   const router = useRouter();
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
@@ -81,10 +85,55 @@ function TenderForm({ user }: Props) {
     console.log(values);
   };
 
+  useEffect(() => {
+    if (uploadedGemBidDoc !== undefined && autofill) {
+      axios
+        .post("http://localhost:8080/extract-pdf", {
+          pdfLink: uploadedGemBidDoc,
+        })
+        .then((response) => {
+          console.log("Response:", response.data);
+        })
+        .catch((error) => {
+          console.error(
+            "Error:",
+            error.response ? error.response.data : error.message
+          );
+        });
+    }
+  }, [uploadedGemBidDoc]); //
+
+  useEffect(() => {
+    if (uploadedTenderInformation !== undefined && autofill) {
+      axios
+        .post("http://localhost:8081/extract-pdf", {
+          pdfLink: uploadedTenderInformation,
+        })
+        .then((response) => {
+          console.log("Response:", response.data);
+        })
+        .catch((error) => {
+          console.error(
+            "Error:",
+            error.response ? error.response.data : error.message
+          );
+        });
+    }
+  }, [uploadedTenderInformation]);
+
   return (
     <div className="flex flex-col justify-center gap-2">
       <span className="text-[12px] font-bold border-black border-b-2">
-        Autofill
+        <div className="flex gap-1 items-center">
+          <Checkbox
+            onCheckedChange={() => {
+              setAutoFill(!autofill);
+            }}
+            className="border-[1px]"
+            checked={autofill}
+          />
+          Autofill{" "}
+        </div>
       </span>
       <div className="flex gap-2 flex-col">
         <div className="mb-3">
@@ -103,7 +152,7 @@ function TenderForm({ user }: Props) {
         </div>
       </div>
       <Separator />
-      <div className="flex flex-col justify-center gap-4">
+      <div className="flex flex-col justify-center gap-4 relative">
         <span className="text-[12px] font-bold border-black border-b-2">
           Fill Manually
         </span>
@@ -225,9 +274,27 @@ function TenderForm({ user }: Props) {
             }))
           }
         />
+        <Loading
+          loading={
+            (uploadedGemBidDoc !== undefined ||
+              uploadedTenderInformation !== undefined) &&
+            autofill
+          }
+        />
       </div>
       <div className="flex gap-2">
-        <Button variant={"default"} onClick={() => console.log({ tenderData })}>
+        <Button
+          variant={"default"}
+          onClick={async () => {
+            const res = await axios.put("/api/tender", {
+              ...tenderData,
+              GemBidDocument: uploadedGemBidDoc,
+              TenderInformationDoc: uploadedTenderInformation,
+            });
+
+            console.log({ res });
+          }}
+        >
           Submit
         </Button>
         <Button variant={"destructive"}>Clear</Button>

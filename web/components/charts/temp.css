@@ -1,0 +1,15 @@
+/* .chart {
+    @apply transition-transform ease-in-out duration-300;
+}
+
+.chart:hover {
+    @apply scale-125 filter-blur bg-opacity-50;
+}
+
+.relative::before {
+    @apply fixed top-0 right-0 bottom-0 left-0 bg-white bg-opacity-50 pointer-events-none z-[-1] opacity-0 transition-opacity duration-300;
+}
+
+.relative:hover::before {
+    @apply opacity-100;
+} */
