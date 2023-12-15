@@ -1,0 +1,97 @@
+first remove all words which are not in english and then extract all this 
+BidEndDate,BidStartDate,BidNumber,Ministry,Organisation,OfficeName,Quantity,MinAvgAnTurnover,BidderYox,MseExemptionOnTurnoverAndYox,DocumentsRequiredFromBidder,TenderInformation,TenderInformationDoc.
+and covert it into json format
+
+
+
+Bid Details/बडबड  ववरणववरण
+Bid End Date/Time/बडबड  बंदबंद  होनेहोने  कक  तारखतारख//समयसमय14-11-2023 13:00:00
+Bid Opening Date/Time/बडबड  खुलनेखुलने  कक
+तारखतारख//समयसमय
+14-11-2023 13:30:00
+Bid Offer Validity (From End Date)/बडबड  पेशकशपेशकश
+वैधतावैधता ( (बंदबंद  होनेहोने  कक  तारखतारख  सेसे))
+90 (Days)
+Ministry/State Name/मं ालयमं ालय//रा!यरा!य  काका  नामनामMinistry Of Railways
+Department Name/वभागवभाग  काका  नामनामIndian Railways
+Organisation Name/संगठनसंगठन  काका  नामनामCentral Railway
+Office Name/काया%लयकाया%लय  काका  नामनामCentral Railway Stores Deptt
+Item Category/मदमद  के टेगरके टेगर
+Custom Bid for Services - Comprehensive Annual
+Maintenance Contract of Lift Other than existing AMC in
+Bhusawal for the period of 03 Years 02 Nos Lift of OTIS Make
+Contract Period/अनुबंधअनुबंध  अविधअविध 3 Year(s) 1 Day(s)
+MSE Exemption for Years of Experience and
+Turnover/ अनुभवअनुभव  केके  वष*वष*  सेसे  एमएसईएमएसई  छ
+ू
+टछ
+ू
+ट
+No
+Startup Exemption for Years of Experience
+and Turnover/ अनुभवअनुभव  केके  वष*वष*  सेसे  /टाट%अप/टाट%अप  छ
+ू
+टछ
+ू
+ट
+No
+Document required from seller/व0े ताव0े ता  सेसे  मांगेमांगे
+गएगए  द/तावेज़द/तावेज़
+Experience Criteria,Bidder Turnover
+*In case any bidder is seeking exemption from Experience /
+Turnover Criteria, the supporting documents to prove his
+eligibility for exemption must be uploaded for evaluation by
+the buyer
+Bid to RA enabled/बडबड  सेसे  2रवस%2रवस%  नीलामीनीलामी  स40यस40य  4कया4कयाNo
+Type of Bid/बडबड  काका  5कार5कारSingle Packet Bid
+Time allowed for Technical Clarifications
+during technical evaluation/तकनीकतकनीक  मू6यांकनमू6यांकन  केके
+दौरानदौरान  तकनीकतकनीक  /प8ीकरण/प8ीकरण  हेतुहेतु  अनुमतअनुमत  समयसमय
+2 Days
+Evaluation Method/मू6यांकनमू6यांकन  प9ितप9ितTotal value wise evaluation
+ 
+Bid Number/
+बोली 0मांक (बड सं:या)
+:
+GEM/2023/B/4135727
+Dated/
+4दनांक : 27-10-2023
+Bid Document/  बडबड  द/तावेज़द/तावेज़
+EMD Detail/ईएमडईएमड  ववरणववरण
+Required/आवCयकताNo
+1 / 5
+
+ePBG Detail/ईपीबीजीईपीबीजी  ववरणववरण
+Required/आवCयकताNo
+Splitting/वभाजनवभाजन
+Bid splitting not applied/बोली वभाजन लागू नहं 4कया गया.
+MII Compliance/एमआईआईएमआईआई  अनुपालनअनुपालन
+MII Compliance/एमआईआई अनुपालनYes
+MSE Purchase Preference/एमएसईएमएसई  खरदखरद  वरयतावरयता
+MSE Purchase Preference/एमएसई खरद वरयताYes
+1. Purchase preference to Micro and Small Enterprises (MSEs): Purchase preference will be given to MSEs as
+defined in Public Procurement Policy for Micro and Small Enterprises (MSEs) Order, 2012 dated 23.03.2012 issued
+by Ministry of Micro, Small and Medium Enterprises and its subsequent Orders/Notifications issued by concerned
+Ministry. If the bidder wants to avail the Purchase preference for services, the bidder must be the Service
+provider of the offered Service. Relevant documentary evidence in this regard shall be uploaded along with the
+bid in respect of the offered service. If L-1 is not an MSE and MSE Service Provider (s) has/have quoted price
+within L-1+ 15% of margin of purchase preference /price band defined in relevant policy, then 100% order
+quantity will be awarded to such MSE bidder subject to acceptance of L1 bid price.
+OM_No.1_4_2021_PPD_dated_18.05.2023 for compliance of Concurrent application of Public Procurement Policy
+for Micro and Small Enterprises Order, 2012 and Public Procurement (Preference to Make in India) Order, 2017. 
+2. Estimated Bid Value indicated above is being declared solely for the purpose of guidance on EMD amount and
+for determining the Eligibility Criteria related to Turn Over, Past Performance and Project / Past Experience etc.
+This has no relevance or bearing on the price to be quoted by the bidders and is also not going to have any
+impact on bid participation. Also this is not going to be used as a criteria in determining reasonableness of
+quoted prices which would be determined by the buyer based on its own assessment of reasonableness and
+based on competitive prices received in Bid / RA process. 
+Additional Qualification/Data Required/अित2रEअित2रE  योFयतायोFयता / /आवCयकआवCयक  डेटाडेटा
+Scope of Work:1698388581.pdf
+Service Level Agreement (SLA):1698319618.pdf
+Payment Terms:1698319656.pdf
+GEM Availability Report ( GAR):1698319688.pdf
+Custom Bid For Services - Comprehensive Annual Maintenance Contract Of Lift Other
+Than Existing AMC In Bhusawal For The Period Of 03 Years 02 Nos Lift Of OTIS Make (
+1 )
+Technical Specifications/तकनीकतकनीक  विश8याँविश8याँ  
+2 / 5"
