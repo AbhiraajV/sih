@@ -1,11 +1,19 @@
 import { auth } from "@clerk/nextjs";
 import prisma from "./prisma";
+import { UserWithProductsAndTenders } from "./types";
 
-export const currentProfile = async () => {
-  const { userId } = auth();
+export const currentProfile =
+  async (): Promise<UserWithProductsAndTenders | null> => {
+    const { userId } = auth();
 
-  if (!userId) return null;
+    if (!userId) return null;
 
-  const profile = await prisma.profile.findUnique({ where: { userId } });
-  return profile;
-};
+    const profile = await prisma.user.findUnique({
+      where: { userId },
+      include: {
+        products: true,
+        tenders: true,
+      },
+    });
+    return profile;
+  };

@@ -1,23 +1,36 @@
 import { currentUser, redirectToSignIn } from "@clerk/nextjs";
 import prisma from "@/lib/prisma";
-import { Profile } from "@prisma/client";
+import { User } from "@prisma/client";
+import { UserWithProductsAndTenders } from "./types";
 
-export const initiateProfile = async (): Promise<Profile> => {
-  const user = await currentUser();
-  if (!user) return redirectToSignIn();
-  const profile = await prisma.profile.findUnique({
-    where: { userId: user.id },
-  });
-  if (profile) return profile;
+export const initiateProfile =
+  async (): Promise<UserWithProductsAndTenders> => {
+    const user = await currentUser();
+    console.log({ user });
+    if (!user) return redirectToSignIn();
+    const profile = await prisma.user.findUnique({
+      where: { email: user.emailAddresses[0].emailAddress },
+      include: {
+        products: true,
+        tenders: true,
+      },
+    });
+    if (profile) return profile;
 
-  const newProfile = await prisma.profile.create({
-    data: {
-      userId: user.id,
-      name: `${user.firstName} ${user.lastName}`,
-      imageUrl: user.imageUrl,
-      email: user.emailAddresses[0].emailAddress,
-    },
-  });
+    const newProfile = await prisma.user.create({
+      data: {
+        email: user.emailAddresses[0].emailAddress,
+        userId: user.id,
+        username: "",
+        userType: "Unknown",
+        products: undefined,
+        tenders: undefined,
+      },
+      include: {
+        products: true,
+        tenders: true,
+      },
+    });
 
-  return newProfile;
-};
+    return newProfile;
+  };

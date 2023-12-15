@@ -32,7 +32,7 @@ async function extractPdfData(pdfPath) {
     const dataBuffer = fs.readFileSync(pdfPath);
     const data = await pdfParse(dataBuffer, DEFAULT_OPTIONS);
 
-    return data;
+    return data.text;
   } catch (error) {
     throw new Error(`Error extracting data from PDF: ${error.message}`);
   }

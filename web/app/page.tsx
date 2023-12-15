@@ -1,16 +1,18 @@
 import { initiateProfile } from "@/lib/initiate-profile";
-import Workspace from "../components/workspace/Workspace";
-import FileInfoFormModal from "@/components/modal/FormDialogue";
 import { redirectToSignIn } from "@clerk/nextjs";
-import axios from "axios";
+import UserTypeSetup from "@/components/UserTypeSetup";
+import prisma from "@/lib/prisma";
+import EmployeeHome from "@/components/EmployeeHome";
+
 export default async function Home() {
-  const profile = await initiateProfile();
-  console.log({ profile });
-  if (!profile) redirectToSignIn();
+  const user = await initiateProfile();
+  const products = await prisma.product.findMany({});
+  if (!user) redirectToSignIn();
   return (
     <div className="max-w-[100vw]">
-      <FileInfoFormModal />
-      <Workspace profile={profile} />
+      {/* <FileInfoFormModal /> */}
+      <UserTypeSetup user={user} products={products} />
+      <EmployeeHome />
     </div>
   );
 }

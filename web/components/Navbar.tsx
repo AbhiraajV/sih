@@ -15,18 +15,21 @@ function Navbar({}: Props) {
   }
   return (
     <div className="w-full md:h-70px md:py-8 py-3 pl-5 md:px-0 flex items-center text-sm font-semibold">
+      <div className="flex-[0.5] flex">
+        <div>NEEPCO:Vendor</div>
+      </div>
       <div className="flex-1 flex gap-5">
         <div
           className=" font-semibold cursor-pointer"
-          onClick={() => router.push("/")}
+          onClick={() => router.push("/create-tender")}
         >
-          New Upload
+          New Tender
         </div>
         <div
           className=" font-semibold cursor-pointer"
           onClick={() => router.push("/your-files")}
         >
-          Your Files
+          Your Tenders
         </div>
       </div>
       <div className="flex-none ml-auto">
