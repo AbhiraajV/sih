@@ -39,7 +39,7 @@ async function extractPdfData(pdfPath) {
 }
 
 // Replace 'your-pdf-file.pdf' with the actual path to your PDF file
-const pdfPath = "A:/SIH/zservers/utils/GeM-Bidding-5622750.pdf";
+const pdfPath = "K:/SIH 2023/sih/zservers/utils/GeM-Bidding-5622750.pdf";
 
 extractPdfData(pdfPath, 2)
   .then((extractedText) => {

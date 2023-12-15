@@ -2,6 +2,7 @@
   "name": "utils",
   "version": "1.0.0",
   "description": "",
+  "type":"module" ,
   "main": "pdfExtractor.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,6 +11,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "pdf-parse": "^1.1.1"
+    "colors": "^1.4.0",
+    "dotenv": "^16.3.1",
+    "openai": "^4.21.0",
+    "pdf-parse": "^1.1.1",
+    "readline-sync": "^1.4.10"
   }
 }
