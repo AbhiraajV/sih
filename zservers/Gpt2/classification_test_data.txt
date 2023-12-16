@@ -1,0 +1,26 @@
+ {
+  FeasibilityStudies 
+  ElectricalMaintenance 
+  InfrastructureMaintenance 
+  SecurityInfrastructureConstruction 
+  ResidentialConstruction 
+  CivilAndHydroMechanicalWorks 
+  SupplyAndEquipmentProcurement 
+  MultifunctionalEquipmentSupply 
+  RailAndCableProcurement 
+  WaterPurificationSystemProcurement 
+  CarAndTaxiHiringServices 
+  FloorCoatingAndPaintingService 
+  GabionWallConstruction 
+  RenovationAndModernization 
+  SurveyAndTopographicalServices 
+}
+this are the classes among this which classes this data belongs to atleast three classes and the ouput 
+should be stricktly in this format {"categories": ["calss1","class2","class3",...]}
+
+NEEPCO Ltd. has published e-tender vide Bid No. : GEM/2023/B/4313978 Dated: 08.12.2023 in 
+Govt. e-Marketplace (GeM) portal (https://gem.gov.in) for the contract “PREPARATION OF PREFEASIBILITY REPORT (PFR) FOR KURUNG HYDRO ELECTRIC PROJECT (320 MW), KRA DAADI 
+DISTRICT, ARUNACHAL PRADESH”.
+Interested bidders are requested to visit the GeM portal for participation in the tender. Any subsequent 
+change/modifications/ notifications against this tender shall be updated in GeM portal only.
+Dated: 08.12.2023.
