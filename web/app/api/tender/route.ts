@@ -3,6 +3,7 @@ import { connectUserToProduct } from "@/lib/functionsPrisma";
 import { Product, ProductProductCategory, Tender } from "@prisma/client";
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
+import axios from "axios";
 
 export async function POST(req: Request) {
   try {
@@ -56,7 +57,13 @@ export async function PUT(req: Request) {
     } = (await req.json()) as Tender & {
       productCategoriesToConnect: ProductProductCategory[];
     };
-
+    const productIds = await prisma.product.findMany({
+      where: {
+        category: {
+          in: productCategoriesToConnect,
+        },
+      },
+    });
     const createdTender = await prisma.tender.create({
       data: {
         BidEndDate,
@@ -74,13 +81,21 @@ export async function PUT(req: Request) {
         TenderInformationDoc,
         GemBidDocument,
         userId,
+        productCategories: {
+          // Create new TenderProductCategory records for each product
+          createMany: {
+            data: productIds.map((productId) => ({
+              productId: productId.id,
+              // You can add additional data to the TenderProductCategory here if needed
+            })),
+          },
+        },
       },
       include: {
         createdBy: true,
         productCategories: true, // Include associated productCategories in the response
       },
     });
-
     return NextResponse.json(createdTender);
   } catch (error) {
     console.log("TENDER", error);

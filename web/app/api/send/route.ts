@@ -8,17 +8,20 @@ const resend = new Resend(process.env.RESEND_APIKEY);
 
 export async function POST(req: Request) {
   const { id } = (await req.json()) as Tender;
+  console.log({ id });
   const productsTenderTable = await prisma?.tenderProductCategory.findMany({
     where: { tenderId: id },
   });
   const allProductIds = productsTenderTable?.map(
     (product) => product.productId
   );
+  console.log({ allProductIds });
   const products = await prisma?.product.findMany({
     where: {
       id: { in: allProductIds },
     },
   });
+  console.log({ products });
   const users = await prisma?.user.findMany({
     where: {
       AND: {
@@ -31,6 +34,7 @@ export async function POST(req: Request) {
       },
     },
   });
+  console.log({ users });
   if (!users) return NextResponse.json("No users found");
 
   try {

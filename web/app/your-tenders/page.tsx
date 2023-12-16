@@ -152,7 +152,7 @@ async function YourFiles({ searchParams }: Props) {
             </div>
           </div>
 
-          <div className="w-full md:w-[67%] border-gray rounded-md shadow-md p-[20px]">
+          <div className="w-[67.85%] border-gray rounded-md shadow-md p-[20px]">
             <h3 className="text-lg font-semibold mb-2">
               Categorized Tender Distribution
             </h3>
@@ -163,6 +163,9 @@ async function YourFiles({ searchParams }: Props) {
             />
           </div>
         </div>
+      </div>
+      <div className="absolute rounded-lg bottom-[5%] right-[2.5%] h-[90vh] w-[30vw] bg-blue-300">
+        Chat
       </div>
     </div>
   );

@@ -24,7 +24,7 @@ function ServerControlledPagination({ count, curlen }: Props) {
   const searchParams = useSearchParams()!;
   const router = useRouter();
   const pathname = usePathname();
-  const [take, setTake] = useState(5);
+  const [take, setTake] = useState(3);
   const [skip, setSkip] = useState(0);
   useEffect(() => {
     const params = new URLSearchParams(searchParams);
@@ -52,7 +52,7 @@ function ServerControlledPagination({ count, curlen }: Props) {
               <SelectValue placeholder={1} />
             </SelectTrigger>
             <SelectContent side="top">
-              {[5, 10, 20, 30, 40, 50].map((pageSize) => (
+              {[3, 5, 10, 20, 30, 40, 50].map((pageSize) => (
                 <SelectItem key={pageSize} value={`${pageSize}`}>
                   {pageSize}
                 </SelectItem>

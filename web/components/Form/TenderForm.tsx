@@ -4,7 +4,7 @@ import { DatePickerWithRange } from "../ui/date-picker";
 import { DateRange } from "react-day-picker";
 import { addDays } from "date-fns";
 import { Input } from "../ui/input";
-import { Tender } from "@prisma/client";
+import { ProductProductCategory, Tender } from "@prisma/client";
 import { UserWithProductsAndTenders } from "@/lib/types";
 import { Textarea } from "../ui/textarea";
 import { Separator } from "@radix-ui/react-dropdown-menu";
@@ -35,6 +35,9 @@ const formSchema = z.object({
 });
 
 function TenderForm({ user }: Props) {
+  const [categories, setCategories] = useState<
+    ProductProductCategory | undefined
+  >();
   const [date, setDate] = React.useState<DateRange | undefined>({
     from: new Date(2022, 0, 20),
     to: addDays(new Date(2022, 0, 20), 20),
@@ -42,10 +45,13 @@ function TenderForm({ user }: Props) {
   const [uploadedTenderInformation, setUploadedTenderInformation] = useState<
     string | undefined
   >();
+  const [autofill, setAutoFill] = useState<boolean>(true);
 
   const [uploadedGemBidDoc, setUploadedGemBidDoc] = useState<
     string | undefined
   >();
+
+  const [loading, setLoading] = useState<boolean>(false);
 
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -54,24 +60,23 @@ function TenderForm({ user }: Props) {
       tenderInfoPdfUrl: "",
     },
   });
-  const [autofill, setAutoFill] = useState<boolean>(true);
   const [tenderData, setTenderData] = React.useState<Tender>({
     id: 1,
     userId: user.id,
     BidEndDate: date!.to!,
     BidStartDate: date!.from!,
-    BidNumber: "",
+    BidNumber: null,
     Ministry: "Ministry of Power",
     Organisation: "North Eastern Electric Power Cooperation Limited",
-    OfficeName: "",
-    Quantity: 0,
-    MinAvgAnTurnover: "",
-    BidderYox: 0,
+    OfficeName: null,
+    Quantity: null,
+    MinAvgAnTurnover: null,
+    BidderYox: null,
     MseExemptionOnTurnoverAndYox: false,
-    DocumentsRequiredFromBidder: "",
-    TenderInformation: "",
-    GemBidDocument: "",
-    TenderInformationDoc: "",
+    DocumentsRequiredFromBidder: null,
+    TenderInformation: null,
+    GemBidDocument: null,
+    TenderInformationDoc: null,
   });
   const router = useRouter();
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
@@ -87,12 +92,18 @@ function TenderForm({ user }: Props) {
 
   useEffect(() => {
     if (uploadedGemBidDoc !== undefined && autofill) {
+      setLoading(true);
       axios
         .post("http://localhost:8080/extract-pdf", {
           pdfLink: uploadedGemBidDoc,
         })
         .then((response) => {
-          console.log("Response:", response.data);
+          console.log({ out: response.data.out });
+          const tenderExtr = response.data.out as Tender;
+          setTenderData(tenderExtr);
+          console.log({ tenderExtr });
+          setUploadedGemBidDoc(undefined);
+          setLoading(false);
         })
         .catch((error) => {
           console.error(
@@ -109,8 +120,9 @@ function TenderForm({ user }: Props) {
         .post("http://localhost:8081/extract-pdf", {
           pdfLink: uploadedTenderInformation,
         })
-        .then((response) => {
-          console.log("Response:", response.data);
+        .then(({ data: { out, extractedText } }) => {
+          console.log({ out, extractedText });
+          setCategories(out.relatedCategories);
         })
         .catch((error) => {
           console.error(
@@ -167,7 +179,14 @@ function TenderForm({ user }: Props) {
             <span className="text-xs font-semibold ml-1 mb-1">
               issuing ministry
             </span>
-            <Input value="Ministry of Power" disabled />
+            <Input
+              value={
+                tenderData.Ministry !== null && tenderData.Ministry.length >= 0
+                  ? tenderData.Ministry
+                  : "Ministry of Power"
+              }
+              disabled
+            />
           </span>
         </div>
         <div className="flex justify-between gap-2">
@@ -176,7 +195,12 @@ function TenderForm({ user }: Props) {
               issuing organisation
             </span>
             <Input
-              value="North Eastern Electric Power Corporation Limited"
+              value={
+                tenderData.Organisation !== null &&
+                tenderData.Organisation.length >= 0
+                  ? tenderData.Organisation
+                  : "North Eastern Electric Power Corporation Limited"
+              }
               disabled
             />
           </span>
@@ -191,6 +215,7 @@ function TenderForm({ user }: Props) {
                   OfficeName: e.target.value,
                 }))
               }
+              value={tenderData.OfficeName ? tenderData.OfficeName : undefined}
             />
           </span>
         </div>
@@ -202,32 +227,48 @@ function TenderForm({ user }: Props) {
             onChange={(e) =>
               setTenderData((prev) => ({ ...prev, BidNumber: e.target.value }))
             }
+            value={tenderData.BidNumber ? tenderData.BidNumber : undefined}
           />
           <Input
             placeholder="Quantity"
-            type="number"
+            // type="number"
             onChange={(e) =>
               setTenderData((prev) => ({
                 ...prev,
                 Quantity: parseInt(e.target.value),
               }))
             }
+            value={
+              tenderData.Quantity !== null ? tenderData.Quantity : undefined
+            }
           />
         </div>
         <div className="flex justify-between gap-2">
           <Input
             placeholder="Minimum Required Years of Experience of Bidder"
-            type="number"
+            // type="number"
             onChange={(e) =>
               setTenderData((prev) => ({
                 ...prev,
                 BidderYox: parseInt(e.target.value),
               }))
             }
+            value={
+              tenderData.BidderYox !== null
+                ? isNaN(tenderData.BidderYox)
+                  ? 0
+                  : tenderData.BidderYox
+                : undefined
+            }
           />
           <Input
             placeholder="Minimum Average Annual Turnover"
-            type="number"
+            // type="number"
+            value={
+              tenderData.MinAvgAnTurnover !== null
+                ? tenderData.MinAvgAnTurnover
+                : undefined
+            }
             onChange={(e) =>
               setTenderData((prev) => ({
                 ...prev,
@@ -240,7 +281,12 @@ function TenderForm({ user }: Props) {
         <div className="flex items-center space-x-2 ml-1">
           <Checkbox
             id="mse"
-            value={tenderData.MseExemptionOnTurnoverAndYox ? "true" : "false"}
+            value={
+              // @ts-ignore
+              tenderData.MseExemptionOnTurnoverAndYox !== "No"
+                ? "true"
+                : "false"
+            }
             onCheckedChange={() =>
               setTenderData((prev) => ({
                 ...prev,
@@ -258,6 +304,11 @@ function TenderForm({ user }: Props) {
         </div>
         <Textarea
           placeholder="Additional Documents Required"
+          value={
+            tenderData.DocumentsRequiredFromBidder !== null
+              ? tenderData.DocumentsRequiredFromBidder
+              : undefined
+          }
           onChange={(e) =>
             setTenderData((prev) => ({
               ...prev,
@@ -274,25 +325,63 @@ function TenderForm({ user }: Props) {
             }))
           }
         />
-        <Loading
-          loading={
-            (uploadedGemBidDoc !== undefined ||
-              uploadedTenderInformation !== undefined) &&
-            autofill
-          }
-        />
+        <Loading loading={loading} />
       </div>
       <div className="flex gap-2">
         <Button
           variant={"default"}
           onClick={async () => {
-            const res = await axios.put("/api/tender", {
-              ...tenderData,
-              GemBidDocument: uploadedGemBidDoc,
-              TenderInformationDoc: uploadedTenderInformation,
-            });
+            const data = autofill
+              ? {
+                  ...tenderData,
+                  GemBidDocument: uploadedGemBidDoc,
+                  DocumentsRequiredFromBidder:
+                    tenderData.DocumentsRequiredFromBidder?.toString(),
+                  TenderInformationDoc: uploadedTenderInformation,
+                  userId: user.id,
+                  // @ts-ignore
+                  BidStartDate: new Date(tenderData.BidStartDate),
+                  // @ts-ignore
+                  BidEndDate: new Date(tenderData.BidEndDate),
+                  Quantity:
+                    typeof tenderData.Quantity === "number"
+                      ? tenderData.Quantity
+                      : typeof tenderData.Quantity === "string" &&
+                        !isNaN(parseInt(tenderData.Quantity, 10))
+                      ? parseInt(tenderData.Quantity, 10)
+                      : 0,
 
-            console.log({ res });
+                  MseExemptionOnTurnoverAndYox:
+                    !tenderData.MseExemptionOnTurnoverAndYox ||
+                    // @ts-ignore
+                    tenderData.MseExemptionOnTurnoverAndYox === "false"
+                      ? false
+                      : true,
+                  BidderYox:
+                    typeof tenderData.BidderYox === "number"
+                      ? tenderData.BidderYox
+                      : typeof tenderData.BidderYox === "string" &&
+                        !isNaN(parseInt(tenderData.BidderYox, 10))
+                      ? parseInt(tenderData.BidderYox, 10)
+                      : 0,
+                  productCategoriesToConnect: categories,
+                  MinAvgAnTurnover: tenderData?.MinAvgAnTurnover?.toString(),
+                }
+              : tenderData;
+            console.log({ data });
+            axios
+              .put("/api/tender", { ...data })
+              .then(async (res) => {
+                console.log(res);
+                const mail = await axios.post("/api/send", {
+                  id: tenderData.id,
+                });
+                console.log({ mail });
+                // router.push("/your-tenders");
+              })
+              .catch((error) => {
+                console.log(error);
+              });
           }}
         >
           Submit
