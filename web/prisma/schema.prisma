@@ -18,6 +18,7 @@ model User {
   products ProductUser[]
   tenders Tender[]
   kycTime String?
+  paid Boolean?
 }
 // Add a new model for TenderProductCategory
 model TenderProductCategory {

@@ -10,7 +10,7 @@ const PORT = 8080;
 app.use(cors());
 app.use(express.json());
 
-let API_KEY = "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";
+let API_KEY = "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";
 const openai = new OpenAI({
   apiKey: API_KEY,
 });

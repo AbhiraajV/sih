@@ -40,3 +40,145 @@
 .read-the-docs {
   color: #888;
 }
+.cs-conversation-header__content {
+  flex-grow: 0 !important;
+}
+
+.cs-message__content {
+  background-color: #c2c6c8 !important;
+}
+
+.cs-conversation-header__content .cs-conversation-header__user-name {
+  color: white !important;
+  background-color: blue !important;
+}
+
+.cs-message-input__content-editor-wrapper {
+  box-sizing: border-box;
+  position: relative;
+  background-color: white !important;
+  margin: 0;
+  padding: 0.6em 0.9em;
+  border-radius: 0.7em;
+  flex-grow: 1;
+  text-align: left !important;
+}
+
+.cs-chat-container .cs-message-input {
+  border-top: solid 1px #d1dbe3;
+  border-right: solid 0px #d1dbe3;
+  border-bottom: solid 0px #d1dbe3;
+  border-left: solid 0px #d1dbe3;
+  margin-top: auto;
+  padding: 0.3em 0 0.3em 0em;
+  color: rgb(255, 255, 255) !important;
+  background-color: white !important;
+}
+
+.cs-message-input__tools {
+  display: none !important;
+  flex-direction: row;
+  box-sizing: border-box;
+}
+
+.cs-message-input__content-editor {
+  box-sizing: border-box;
+  flex-grow: 1;
+  background-color: white !important;
+  font-family: Helvetica Neue, Segoe UI, Helvetica, Arial, sans-serif;
+  outline: 0;
+  border-top: 0 none;
+  border-right: 0 none;
+  border-bottom: 0 none;
+  border-left: 0 none;
+  overflow: visible;
+  color: rgba(0, 0, 0, .87);
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.cs-message-list {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  min-height: 1.25em;
+  position: relative;
+  color: rgba(0, 0, 0, .87);
+  /* background-color: #6c2591 !important; */
+
+  /* Set the background image */
+  /* background-image: url('https: //cdn-icons-png.flaticon.com/512/4616/4616271.png') !important; */
+
+  /* Set the background size to cover the entire div */
+  background-size: cover !important;
+
+  /* Set the background to not repeat */
+  background-repeat: no-repeat !important;
+
+  /* Center the background image within the div */
+  background-position: center center !important;
+
+  /* Set a fallback background color in case the image is not available or fails to load */
+  background-color: #fff !important;
+
+  /* Add any additional styles as needed */
+  /* For example, you can set the height of the div */
+  /* height: 300px !important; */
+}
+
+.cs-main-container .cs-conversation-header {
+  z-index: 1;
+  background: blue !important;
+  border-bottom-right-radius: 25px !important;
+  border-bottom-left-radius: 25px !important;
+
+  /* Add a blurry shadow */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.521) !important;
+}
+
+.cs-message--outgoing .cs-message__content {
+  color: white !important;
+  background-color: blue !important;
+  border-radius: 0.7em 0.7em 0.7em 0.7em !important;
+  text-align: left !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+}
+
+.cs-message-list .cs-typing-indicator {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 15px;
+  background-color: #fff;
+  padding: 0.5em 0.5em;
+  font-size: .9em;
+  height: 1.25em;
+  line-height: 1.25em;
+
+  color: blue !important;
+}
+
+.cs-typing-indicator__text {
+  box-sizing: inherit;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: blue !important;
+  background-color: transparent;
+  margin: 0 0 0 0.5em;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  font-weight: 500 !important;
+}
+
+.cs-typing-indicator__indicator {
+  box-sizing: inherit;
+  background-color: transparent;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: blue !important;
+}

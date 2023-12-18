@@ -8,7 +8,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import useStore from "@/hooks/useStore";
-import { bitsToMbs, image_size } from "@/utils/helpers/sizeBitsObject";
+// import { bitsToMbs, image_size } from "@/utils/helpers/sizeBitsObject";
 import { Tender } from "@prisma/client";
 import { ColumnDef, Row, Table } from "@tanstack/react-table";
 import {

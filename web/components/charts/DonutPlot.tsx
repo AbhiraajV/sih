@@ -4,6 +4,23 @@ import { Doughnut } from "react-chartjs-2";
 import { Chart, ArcElement } from "chart.js";
 
 Chart.register(ArcElement);
+const colors = [
+  "#FF6384",
+  "#36A2EB",
+  "#FFCE56",
+  "#4CAF50",
+  "#FF9800",
+  "#9C27B0",
+  "#2196F3",
+  "#F44336",
+  "#8BC34A",
+  "#FF5722",
+  "#607D8B",
+  "#673AB7",
+  "#E91E63",
+  "#00BCD4",
+  "#FFEB3B",
+];
 
 const DonutChart = ({
   labels,
@@ -17,16 +34,8 @@ const DonutChart = ({
     datasets: [
       {
         data: dataset,
-        backgroundColor: [
-          "#FF6384",
-          "#36A2EB",
-          "#FFCE56" /* Add more colors as needed */,
-        ],
-        hoverBackgroundColor: [
-          "#FF6384",
-          "#36A2EB",
-          "#FFCE56" /* Add more colors as needed */,
-        ],
+        backgroundColor: colors,
+        hoverBackgroundColor: colors,
       },
     ],
   };

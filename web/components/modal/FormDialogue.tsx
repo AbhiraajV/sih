@@ -7,7 +7,7 @@ import {
   DialogContent,
   DialogDescription,
 } from "../ui/dialog";
-import { ProfileForm } from "../Form/Form";
+// import { ProfileForm } from "../Form/Form";
 type Props = {};
 function FileInfoFormModal({}: Props) {
   const { isOpen, toggle } = useStore((state) => state);
@@ -24,7 +24,7 @@ function FileInfoFormModal({}: Props) {
           </DialogDescription>
         </DialogHeader>
         <div className="px-3 py-4">
-          <ProfileForm close={toggle} />
+          {/* <ProfileForm close={toggle} /> */}
         </div>
       </DialogContent>
     </Dialog>

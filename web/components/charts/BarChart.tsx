@@ -10,10 +10,10 @@ import {
   Legend,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
-import {
-  ImageSizeObjectKeyType,
-  SizeBasedAnalysisData,
-} from "@/utils/helpers/sizeBitsObject";
+// import {
+//   ImageSizeObjectKeyType,
+//   SizeBasedAnalysisData,
+// } from "@/utils/helpers/sizeBitsObject";
 import "./temp.css";
 ChartJS.register(
   CategoryScale,

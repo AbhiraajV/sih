@@ -13,6 +13,7 @@
     "@chatscope/chat-ui-kit-react": "^1.10.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-icons": "^4.12.0",
     "react-simple-chatbot": "^0.6.1"
   },
   "devDependencies": {
@@ -23,6 +24,6 @@
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
-    "vite": "^5.0.8"
+    "vite": "^5.0.10"
   }
 }

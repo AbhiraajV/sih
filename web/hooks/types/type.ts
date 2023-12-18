@@ -1,8 +1,6 @@
-import { File as PrismFileType, Profile } from "@prisma/client";
+// import { File as PrismFileType, Profile } from "@prisma/client";
 
-export type PrismFileWithAdditionalFile = PrismFileType & {
-  file: File | undefined;
-};
+export type PrismFileWithAdditionalFile = any;
 
 export interface FileDataSliceType {
   fileData: PrismFileWithAdditionalFile;
@@ -101,8 +99,8 @@ export interface LoadingBlockSliceType {
 }
 
 export interface ProfileDataSliceType {
-  profileData: Profile;
-  setProfileData: (profile: Profile) => void;
+  profileData: any;
+  setProfileData: (profile: any) => void;
 }
 export const STRIPE_APIKEY =
   "pk_test_51NzYE6SDYYQh4TLS8NciMOzSVHM94qVvY0lp61ohjQGnoh4Zmk0L1Ol5vvywBBNrTk8qQoGQFyQT7jr9C83uXAKR00gy4D3eBF";

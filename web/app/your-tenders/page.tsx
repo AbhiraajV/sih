@@ -14,6 +14,9 @@ import { UserWithProductsAndTenders } from "@/lib/types";
 import { LineChart } from "@/components/charts/LineChart";
 import { Bar } from "react-chartjs-2";
 import VendorBar from "@/components/charts/VendorBar";
+import { Separator } from "@/components/ui/separator";
+import PolarAreaComp from "@/components/charts/PolarArea";
+import { GrowthProjectionChart } from "@/components/charts/LineChartProjection";
 type Props = {
   searchParams: any;
 };
@@ -57,10 +60,10 @@ async function YourFiles({ searchParams }: Props) {
 
       <div className="w-full md:w-1/2 lg:w-2/3 xl:w-3/4">
         <div className="bg-white rounded-lg p-4 ">
-          <div className="mb-4 flex gap-2 justify-between items-center">
+          <div className="mb-4 flex gap-2 justify-between items-start">
             <DataTable columns={columns} data={files} />
             {/* <TenderForm user={user} /> */}
-            <div className="flex flex-col gap-1 w-full">
+            <div className="flex flex-col gap-2 w-full">
               <div className="flex gap-1">
                 <div className="flex justify-start items-start border-gray rounded-md shadow-md p-[20px] w-[200px] h-[30%] flex-col gap-3">
                   <span className="text-lg border-b-2 border-blue-700 font-semibold">
@@ -111,15 +114,15 @@ async function YourFiles({ searchParams }: Props) {
           <ServerControlledPagination count={count} curlen={files.length} />
         </div>
       </div>
-
-      <div className="w-full mt-4">
-        <div className="bg-white rounded-lg p-4 shadow-md">
-          <h2 className="text-xl font-semibold mb-4">Charts Section</h2>
-
-          <div className="flex flex-wrap gap-4">
+      <Separator />
+      <div className="w-full mt-4 mr-[-50%]">
+        <div className="bg-white">
+          <div className="flex flex-row gap-6">
             <div className="w-full md:w-1/2 lg:w-1/3 border-gray rounded-md shadow-md p-[20px]">
               <h3 className="text-lg font-semibold mb-2">
-                Monthly Tender Report
+                <span className="border-b-[2px] border-blue-600">
+                  Monthly Tender Report
+                </span>
               </h3>
               <BarChart
                 labels={[
@@ -150,12 +153,25 @@ async function YourFiles({ searchParams }: Props) {
                 dataset={products.map(() => Math.floor(Math.random() * 100))}
               />
             </div>
+
+            <div className="z-50  w-full md:w-1/2 lg:w-1/3 p-[20px]">
+              <h3 className="text-lg font-semibold mb-[-10px] ">
+                <span className="border-b-[2px] border-blue-600">
+                  Mailing Service Tracker
+                </span>
+              </h3>
+
+              <GrowthProjectionChart />
+            </div>
           </div>
 
-          <div className="w-[67.85%] border-gray rounded-md shadow-md p-[20px]">
-            <h3 className="text-lg font-semibold mb-2">
-              Categorized Tender Distribution
+          <div className="z-50 w-[67.85%] border-gray rounded-md shadow-md p-[20px]">
+            <h3 className="text-lg font-semibold mb-2 ">
+              <span className="border-b-[2px] border-blue-600">
+                Categorized Tender Distribution
+              </span>
             </h3>
+
             <BarChart
               labels={products.map((product) => product.category)}
               done={products.map(() => Math.floor(Math.random() * 31))}
@@ -164,8 +180,15 @@ async function YourFiles({ searchParams }: Props) {
           </div>
         </div>
       </div>
-      <div className="absolute rounded-lg bottom-[5%] right-[2.5%] h-[90vh] w-[30vw] bg-blue-300">
-        Chat
+      <div className="absolute rounded-lg bottom-[-3.5%] right-[-1%]  h-[100vh] w-[35vw]  overflow-hidden">
+        <iframe
+          src="http://localhost:5173" // Change this URL to match your React app on port 3001
+          title="Embedded React App"
+          width="100%"
+          height="100%"
+          frameBorder="0"
+          style={{ overflow: "hidden" }}
+        />
       </div>
     </div>
   );

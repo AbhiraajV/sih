@@ -12,7 +12,7 @@ import createFileMetadataSlice from "./slices/FileDataSlice";
 import createProgressTrackerSlice from "./slices/ProgressSlice";
 import createLoadingBlockSlice from "./slices/LoadingBlockSlice";
 import createFormModalToggleSlice from "./slices/FormModalToggleSlice";
-import createProfileDataSlice from "./slices/ProfileDataSlice";
+// import createProfileDataSlice from "./slices/ProfileDataSlice";
 import createPaymentModalToggleSlice from "./slices/PaymentModalToggleSlice";
 import createDeleteFileModalToggleSlice from "./slices/DeleteFileModalToggleSlice";
 
@@ -22,7 +22,7 @@ const useStore = create<
     FormModalToggleSliceType &
     LoadingBlockSliceType &
     ProgressSliceType &
-    ProfileDataSliceType &
+    // ProfileDataSliceType &
     PaymentModalToggleSliceType &
     DeleteFileModalToggleSliceType
 >((...a) => ({
@@ -30,7 +30,7 @@ const useStore = create<
   ...createProgressTrackerSlice(...a),
   ...createFormModalToggleSlice(...a),
   ...createLoadingBlockSlice(...a),
-  ...createProfileDataSlice(...a),
+  // ...createProfileDataSlice(...a),
   ...createPaymentModalToggleSlice(...a),
   ...createDeleteFileModalToggleSlice(...a),
 }));

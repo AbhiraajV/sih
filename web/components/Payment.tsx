@@ -22,11 +22,11 @@ function Payment({}: Props) {
       .confirmPayment({
         elements,
         confirmParams: {
-          return_url:
-            "http://localhost:3000/your-files/" +
-            paymentForFileId +
-            "/?userId=" +
-            paymentByUserId,
+          return_url: "http://localhost:3000",
+          // /your-files/" +
+          // paymentForFileId +
+          // "/?userId=" +
+          // paymentByUserId,
         },
       })
       .then((response) => {

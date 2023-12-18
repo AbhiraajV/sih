@@ -43,25 +43,51 @@ function PaymentFormModalDialogue({}: Props) {
       });
   }, [clientPaymentSecret, isPaymentModalOpen]);
   const stripePromise = loadStripe(STRIPE_APIKEY);
-  if (!isPaymentModalOpen || !clientPaymentSecret) return <></>;
+  // if (localStorage.getItem("paymentDone") === "true") return <></>;
+  if (!isPaymentModalOpen || !clientPaymentSecret) return;
+  <Dialog open={isPaymentModalOpen} onOpenChange={togglePaymentModalOpen}>
+    <DialogContent className="bg-white text-black p-0 overflow-hidden">
+      <DialogHeader className="pt-8 px-6">
+        <DialogTitle className="text-2xl text-center font-bold">
+          Get Prioritized Tender Information!
+        </DialogTitle>
+        <DialogDescription className="w-full text-center text-xs">
+          By completing this payment, you will be registered with us, and we
+          will notify you of tailored tenders matching your expertise.
+          <br />
+          <span className="text-xs font-bold">
+            {" "}
+            Get updates on opportunities personalized just for you.
+          </span>
+        </DialogDescription>
+      </DialogHeader>
+      {/* <Payment />{" "} */}
+    </DialogContent>
+  </Dialog>;
   return (
     <Elements
       stripe={stripePromise}
       options={{ clientSecret: clientPaymentSecret }}
     >
-      <Dialog open={isPaymentModalOpen} onOpenChange={togglePaymentModalOpen}>
+      <Dialog
+        open={isPaymentModalOpen}
+        onOpenChange={() => {
+          // localStorage.setItem("paymentDone", "true");
+          togglePaymentModalOpen();
+        }}
+      >
         <DialogContent className="bg-white text-black p-0 overflow-hidden">
           <DialogHeader className="pt-8 px-6">
             <DialogTitle className="text-2xl text-center font-bold">
-              Prioritize This File
+              Get Prioritized Tender Information!
             </DialogTitle>
-            <DialogDescription className="w-full text-center">
-              Get Prioritized Decode for your Files within minutes/seconds.{" "}
+            <DialogDescription className="w-full text-center text-xs">
+              By completing this payment, you will be registered with us, and we
+              will notify you of tailored tenders matching your expertise.
               <br />
               <span className="text-xs font-bold">
                 {" "}
-                we pass your request to specialized servers for faster decode
-                and download
+                Get updates on opportunities personalized just for you.
               </span>
             </DialogDescription>
           </DialogHeader>

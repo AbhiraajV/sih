@@ -34,7 +34,7 @@ function ServerControlledPagination({ count, curlen }: Props) {
   }, [take, skip, searchParams, router, pathname]);
 
   return (
-    <div className="flex items-center justify-between px-2">
+    <div className="flex items-center justify-between px-2 mt-[-50px]">
       <div className="flex-1 text-sm text-muted-foreground">
         {curlen} of {count} row(s).
       </div>

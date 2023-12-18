@@ -10,7 +10,7 @@ import {
 } from "firebase/storage";
 import { PrismFileWithAdditionalFile } from "@/hooks/types/type";
 import { createFile } from "../file-prisma";
-import { Profile } from "@prisma/client";
+// import { Profile } from "@prisma/client";
 
 import { ReadStream, createReadStream, createWriteStream, readdir } from "fs";
 const firebaseConfig = {
@@ -29,7 +29,7 @@ export const storage = getStorage(app);
 export const uploadZipFunction = async (
   zipBlob: Blob | undefined,
   fileData: PrismFileWithAdditionalFile,
-  profile: Profile | null
+  profile: any | null
 ) => {
   console.log({ uploadRequirements: { zipBlob, profile, fileData } });
   if (!profile) return { error: "no profile found" };

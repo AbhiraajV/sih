@@ -1,16 +1,19 @@
 /** @type {import('next').NextConfig} */
+
+const withPWA = require("next-pwa");
+
 const nextConfig = {
-  webpack5: true,
-  webpack: (config) => {
-    config.resolve.fallback = { fs: false };
-    return config;
-  },
-  experimental: {
-    serverActions: true,
-  },
+  // experimental: {
+  //   serverActions: true,
+  // },
   images: {
     domains: ["uploadthing.com", "utfs.io", "files.edgestore.dev"],
   },
+  ...withPWA({
+    dest: "public",
+    register: true,
+    skipWaiting: true,
+  }),
 };
 
 module.exports = nextConfig;
